@@ -3,7 +3,7 @@ import "../../styles/newsletter.css";
 
 const Newsletter = () => {
   return (
-    <section className="c">
+    <section className="newsletter">
       <div className="container">
         <div className="newsletter__wrapper">
           <div className="newsletter__content">

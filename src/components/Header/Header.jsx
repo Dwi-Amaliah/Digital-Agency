@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import "./Style.css";
 
 const nav__links = [
@@ -21,8 +21,25 @@ const nav__links = [
 ];
 
 const Header = ({ theme, toggleTheme }) => {
+  const headerRef = useRef(null);
+  const headerFunc = () => {
+    if (
+      document.body.scrollTop > 80 ||
+      document.documentElement.scrollTop > 80
+    ) {
+      headerRef.current.classList.add("header__shrink");
+    } else {
+      headerRef.current.classList.remove("header__shrink");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", headerFunc);
+
+    return () => window.removeEventListener("scroll", headerFunc);
+  }, []);
   return (
-    <header className="header">
+    <header className="header" ref={headerRef}>
       <div className="container">
         <div className="nav__wrapper">
           <h2 className="logo__h2">Digency</h2>
