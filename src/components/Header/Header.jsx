@@ -7,11 +7,15 @@ const nav__links = [
     display: "Home",
   },
   {
+    path: "#about",
+    display: "About",
+  },
+  {
     path: "#service",
     display: "Service",
   },
   {
-    path: "#project",
+    path: "#projects",
     display: "Project",
   },
   {
@@ -38,6 +42,27 @@ const Header = ({ theme, toggleTheme }) => {
 
     return () => window.removeEventListener("scroll", headerFunc);
   }, []);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    const targetAttr = e.target.getAttribute("href");
+
+    if (targetAttr) {
+      const element = document.querySelector(targetAttr);
+      if (element) {
+        const location = element.offsetTop;
+        window.scrollTo({
+          left: 0,
+          top: location - 80,
+        });
+      } else {
+        console.error(`Element not found for selector: ${targetAttr}`);
+      }
+    } else {
+      console.error(`Invalid attribute: href is ${targetAttr}`);
+    }
+  };
   return (
     <header className="header" ref={headerRef}>
       <div className="container">
@@ -48,8 +73,12 @@ const Header = ({ theme, toggleTheme }) => {
           <div className="navigation">
             <ul className="menu">
               {nav__links.map((item, index) => (
-                <li className="menu__item">
-                  <a href={item.path} className="menu__link">
+                <li className="menu__item" key={index}>
+                  <a
+                    href={item.path}
+                    onClick={handleClick}
+                    className="menu__link"
+                  >
                     {item.display}
                   </a>
                 </li>
@@ -62,16 +91,19 @@ const Header = ({ theme, toggleTheme }) => {
             <span onClick={toggleTheme}>
               {theme === "light-theme" ? (
                 <span>
-                  <i class="ri-moon-line"></i>Dark
+                  <i class="ri-moon-line"></i>Dark Mode
                 </span>
               ) : (
                 <span>
                   {" "}
-                  <i class="ri-sun-line"></i> Light
+                  <i class="ri-sun-line"></i> Light Mode
                 </span>
               )}
             </span>
           </div>
+          <span className="mobile__menu">
+            <i class="ri-menu-line"></i>
+          </span>
         </div>
       </div>
     </header>
