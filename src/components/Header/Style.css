@@ -82,6 +82,7 @@
     height: 100%;
     background: rgba(6, 11, 26, 0.868);
     z-index: 99999;
+    display: none;
   }
 
   .menu {
@@ -95,5 +96,28 @@
     top: 0;
     right: 0;
     z-index: 99999;
+  }
+
+  .menu__active {
+    display: block;
+  }
+
+  .mobile__menu {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .hero__content h2 {
+    font-size: 1.5rem;
+    line-height: 45px;
+  }
+
+  .hero__content p {
+    font-size: 0.9rem;
+  }
+
+  .primary__btn .secondary__btn {
+    font-style: 0.8em;
   }
 }
